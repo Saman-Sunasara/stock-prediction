@@ -77,13 +77,13 @@ def plot_performance(y_test: pd.Series, preds: pd.Series):
 
 
 def main():
-    st.set_page_config(page_title="Stock Predictor Pro", page_icon=":chart_with_upwards_trend:", layout="wide")
-    st.title("🚀 Stock Prediction Dashboard")
-    st.markdown("Enhancing financial forecasting with technical indicators and ensemble learning.")
+    st.set_page_config(page_title="Indian Stock Predictor", page_icon=":chart_with_upwards_trend:", layout="wide")
+    st.title("🚀 Indian Stock Prediction Dashboard")
+    st.markdown("Specialized forecasting for the NSE market with technical indicators and ensemble learning.")
 
     with st.sidebar:
         st.header("⚙️ Configuration")
-        symbol = st.text_input("Ticker Symbol", value="AAPL").upper().strip()
+        symbol = st.text_input("Ticker Symbol", value="RELIANCE.NS").upper().strip()
         st.divider()
         st.subheader("🗓️ Data Range")
         train_start = st.date_input("Train Start", value=date(2020, 1, 1))
@@ -127,12 +127,12 @@ def main():
                 
                 with col1:
                     st.subheader(f"Next-Day Prediction: {symbol}")
-                    st.metric("Last Close", f"${last_close:.2f}")
-                    st.metric("Predicted Close", f"${pred_val:.2f}", f"{delta:+.2f} ({delta_pct:+.2f}%)")
+                    st.metric("Last Close", f"₹{last_close:.2f}")
+                    st.metric("Predicted Close", f"₹{pred_val:.2f}", f"{delta:+.2f} ({delta_pct:+.2f}%)")
                     
                 with col2:
                     st.subheader("Project Summary")
-                    st.info("This model uses a Random Forest Regressor trained on historical OHLCV data and technical indicators (Returns, SMA, Volatility, RSI, BB).")
+                    st.info("This model is specialized for the Indian Market (NSE) using a Random Forest Regressor trained on historical OHLCV data and technical indicators.")
                     
             except Exception as e:
                 st.warning(f"Could not run prediction: {e}")
