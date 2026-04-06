@@ -9,6 +9,6 @@ __pycache__/
 .idea/
 .vscode/
 .env
-model.joblib
-models/
 data/
+# Keep models but perhaps ignore specific test models if needed
+# models/test_model.joblib
