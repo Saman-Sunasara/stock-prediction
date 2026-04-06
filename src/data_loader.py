@@ -22,6 +22,10 @@ def load_stock_data(symbol: str, start_date: str, end_date: str) -> StockDataset
     if frame.empty:
         raise ValueError(f"No data returned for symbol '{symbol}'.")
 
+    # If yfinance returns multi-index columns (e.g., ('Close', 'AAPL')), flatten them
+    if isinstance(frame.columns, pd.MultiIndex):
+        frame.columns = frame.columns.get_level_values(0)
+
     frame = frame.rename(columns=str.lower)
     if "close" not in frame.columns:
         raise ValueError("Downloaded data does not include close prices.")
