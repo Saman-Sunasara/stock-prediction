@@ -8,6 +8,7 @@ A simple machine learning pipeline that downloads historical stock data, trains 
 - Builds technical indicators (returns, moving averages, volatility)
 - Trains a `RandomForestRegressor`
 - Saves and reuses trained model for inference
+- Includes a Streamlit web app for interactive training and prediction
 
 ## Project Structure
 
@@ -19,6 +20,7 @@ stock-prediction/
     model.py
     train.py
     predict.py
+  app.py
   requirements.txt
   .gitignore
   README.md
@@ -43,6 +45,23 @@ python src/train.py --symbol AAPL --start 2020-01-01 --end 2026-01-01
 ```bash
 python src/predict.py --symbol AAPL --start 2024-01-01 --end 2026-01-01
 ```
+
+## Run Web App (Streamlit)
+
+```bash
+streamlit run app.py
+```
+
+## Deploy on Streamlit Community Cloud
+
+1. Push this repository to GitHub.
+2. Go to [https://share.streamlit.io/](https://share.streamlit.io/).
+3. Click **New app**.
+4. Select your repository: `Saman-Sunasara/stock-prediction`.
+5. Set main file path to `app.py`.
+6. Click **Deploy**.
+
+After deployment, Streamlit gives you a public app URL.
 
 ## Notes
 
