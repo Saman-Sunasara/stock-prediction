@@ -63,6 +63,25 @@ streamlit run app.py
 
 After deployment, Streamlit gives you a public app URL.
 
+## GitHub Automation Added
+
+This repo now includes GitHub Actions:
+
+- `CI` workflow: installs dependencies and validates Python modules on every push/PR.
+- `Docker Publish` workflow: builds and publishes image to GitHub Container Registry (`ghcr.io`) on every push to `main`.
+
+Expected image name:
+
+```text
+ghcr.io/saman-sunasara/stock-prediction:latest
+```
+
+You can run that image anywhere that supports Docker:
+
+```bash
+docker run -p 8501:8501 ghcr.io/saman-sunasara/stock-prediction:latest
+```
+
 ## Notes
 
 - This is an educational project and not financial advice.
