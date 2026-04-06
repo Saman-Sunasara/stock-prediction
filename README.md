@@ -68,7 +68,8 @@ After deployment, Streamlit gives you a public app URL.
 This repo now includes GitHub Actions:
 
 - `CI` workflow: installs dependencies and validates Python modules on every push/PR.
-- `Docker Publish` workflow: builds and publishes image to GitHub Container Registry (`ghcr.io`) on every push to `main`.
+- `Container Publish` workflow: builds and publishes image to GitHub Container Registry (`ghcr.io`) on every push to `main`.
+- `Deploy Hooks` workflow: triggers deployment hooks for Render/Railway/Koyeb on every push to `main` (if secrets are set).
 
 Expected image name:
 
@@ -81,6 +82,23 @@ You can run that image anywhere that supports Docker:
 ```bash
 docker run -p 8501:8501 ghcr.io/saman-sunasara/stock-prediction:latest
 ```
+
+## Full Auto-Deploy Setup (one-time secrets)
+
+To enable deployment "everywhere", set these **GitHub repository secrets**:
+
+- `DOCKERHUB_USERNAME` and `DOCKERHUB_TOKEN` (optional): also publish image to Docker Hub.
+- `RENDER_DEPLOY_HOOK_URL` (optional): trigger Render deploy on push.
+- `RAILWAY_DEPLOY_HOOK_URL` (optional): trigger Railway deploy on push.
+- `KOYEB_DEPLOY_HOOK_URL` (optional): trigger Koyeb deploy on push.
+
+Path: `GitHub repo -> Settings -> Secrets and variables -> Actions -> New repository secret`
+
+Once these are added, every push to `main` auto-runs:
+
+- CI checks
+- image build and publish (GHCR + optional Docker Hub)
+- host redeploy webhooks (optional)
 
 ## Notes
 

@@ -1,0 +1,22 @@
+name: Deploy Hooks
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  trigger-hooks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Render deploy hook (optional)
+        if: ${{ secrets.RENDER_DEPLOY_HOOK_URL != '' }}
+        run: curl -fsS -X POST "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
+
+      - name: Trigger Railway deploy hook (optional)
+        if: ${{ secrets.RAILWAY_DEPLOY_HOOK_URL != '' }}
+        run: curl -fsS -X POST "${{ secrets.RAILWAY_DEPLOY_HOOK_URL }}"
+
+      - name: Trigger Koyeb deploy hook (optional)
+        if: ${{ secrets.KOYEB_DEPLOY_HOOK_URL != '' }}
+        run: curl -fsS -X POST "${{ secrets.KOYEB_DEPLOY_HOOK_URL }}"
